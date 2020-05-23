@@ -40,3 +40,21 @@ Transformer는 multi-head attention을 3가지 방법으로 사용
 ## 4. Why Self-Attention
 ## 5. Training
 ### 5.1 Training Data and Batching
+Train Data : WMT 2014 English-German dataset.
+Sentences는 byte-pair encoding (shared source-target vocabulary of about 37000 tokens를 가짐) 을 통해 인코딩됨. 
+### 5.2 Hardware and Schedule
+논문에서는 8 NVIDIA P100 GPUs으로 훈련.
+각 training step은 0.4s 걸림.
+총 100,000 steps (12 hours) 걸림.
+### 5.3 Optimizer
+베타1 = 0.9, 베타2 = 0.98, 입실론 = 10^-9
+learning rate = ...생략...
+warmup_steps = 4000.
+### 5.4 Regularization
+1. Residual Dropout
+  각 sub-layer의 output에 drouput을 적용. (add-norm 되기 전)
+  encoder, decoder 안에 sums of embeddings, positional encodings에도 적용.
+  for base, P_drop = 0.1
+
+2. Label Smoothing
+  훈련 중, 입실론_ls = 0.1을 적용
