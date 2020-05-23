@@ -38,3 +38,5 @@ Transformer는 multi-head attention을 3가지 방법으로 사용
 ### 3.5 Positional Encoding
 
 ## 4. Why Self-Attention
+## 5. Training
+### 5.1 Training Data and Batching
