@@ -1,4 +1,8 @@
 # kc-ml2_take-home-project
+KAIST EE lee hae in (이해인)
+**Attention Is All You Need.**
+~this is code~
+_this is tilt._
 ## introduction
 seqential modeling이나 transduction problem (language modeling, machine translation 등)을 푸는데 RNN, LSTM, GRN 등이 많이 쓰였다.
 많은 발전이 있었지만 이들은 본질적으로 각 sequence로 hidden state를 계산하는 방법은 병렬화가 불가능하므로 sequence 길이가 길다면 memory limit으로 인해 example들을 배치하는 것이 중요해진다. 
