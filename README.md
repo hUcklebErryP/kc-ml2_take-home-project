@@ -1,7 +1,8 @@
 # kc-ml2_take-home-project
 KAIST EE lee hae in (이해인)
 **Attention Is All You Need.**
-~this is code~
+~this is middle line~
+`this is code`
 _this is tilt._
 ## 1. introduction
 seqential modeling이나 transduction problem (language modeling, machine translation 등)을 푸는데 RNN, LSTM, GRN 등이 많이 쓰였다.
