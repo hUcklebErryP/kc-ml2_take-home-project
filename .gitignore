@@ -1,0 +1,7 @@
+# byte-pair encoding Tokenize Model
+m.model
+m.vocab
+__pycache__/
+
+# vscode
+.vscode/
