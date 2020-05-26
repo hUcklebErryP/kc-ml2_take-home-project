@@ -14,7 +14,8 @@
 #     print ( sp.Encode("This is nation") )
 
 import bpe
+import attention
 
-train_en_embed = bpe.Bpe("./train.en", 37000)
+#train_en_tokens = bpe.Bpe("./train.en", 37000)
 
 
