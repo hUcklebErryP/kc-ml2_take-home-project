@@ -5,12 +5,12 @@ import preprocess
 import transformer
 import pickle
 
-vocab_size = 37000
-d_model = 512
+vocab_size = 3700
+d_model = 64
 h = 8
 N = 1
 dp = 0.1
-d_ff = 2048
+d_ff = 512
 epochs = 3
 
 SRC = preprocess.Data("./train.en", "src", vocab_size)
@@ -41,8 +41,8 @@ def train_model(epochs, print_every=100):
     for epoch in range(epochs):
         
         for i in range(len(SRC.data)):
-        #     if i > 1000:
-        #         break
+            if i > 1000:
+                break
 
             preds = model(SRC.data[i], TRG.data[i][:-1])
             

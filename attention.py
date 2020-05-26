@@ -11,9 +11,13 @@ import math
 # h = 8
 device = torch.device("cuda:0")
 
-def scal_dot_attention(Q, K, V, d_k=64, mask=None):
+def scal_dot_attention(Q, K, V, d_k=64, mask=False):
     scores = torch.matmul(Q, K.t() / math.sqrt(d_k)) # size (max_len, max_len)
     # TODO: Mask : Optional FIXME: transpose(-2,-1)
+
+    if mask == True:
+        scores = torch.tril(scores) + torch.triu(torch.ones(scores.size(0), scores.size(1)).cuda()) * 1e-9
+
     scores = F.softmax(scores, dim=-1) # FIXME: softmax
     return torch.matmul(scores, V)
     # CHECK: dim=-1?`
@@ -42,7 +46,7 @@ class Attention(torch.nn.Module):
         # self.W_O = torch.nn.Linear(d_model, d_model)
 
     
-    def forward(self, Q, K, V, mask=None):
+    def forward(self, Q, K, V, mask=False):
         for i in range(self.h):
             head = scal_dot_attention(torch.matmul(Q, self.W_Qs[i]), \
 torch.matmul(K, self.W_Ks[i]), torch.matmul(V, self.W_Vs[i]), self.d_k, mask)

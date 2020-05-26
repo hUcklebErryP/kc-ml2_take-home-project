@@ -75,9 +75,9 @@ class Decoder(torch.nn.Module):
         self.Norm3 = torch.nn.LayerNorm(d_model)
         self.FFNN = FeedForwardNN(d_model, d_ff, dp)
 
-    def forward(self, x, context_vec, mask=None):
-        x1 = self.Norm1(x + self.Dropout1(self.MultiHeadAttention1(x, x, x, mask)))
-        x2 = self.Norm2(x1 + self.Dropout2(self.MultiHeadAttention2(x1, context_vec, context_vec, mask)))
+    def forward(self, x, context_vec):
+        x1 = self.Norm1(x + self.Dropout1(self.MultiHeadAttention1(x, x, x)))
+        x2 = self.Norm2(x1 + self.Dropout2(self.MultiHeadAttention2(x1, context_vec, context_vec, True)))
         return self.Norm3(x2 + self.Dropout3(self.FFNN(x2)))
     
 class Encoders(torch.nn.Module):
@@ -88,6 +88,7 @@ class Encoders(torch.nn.Module):
         self.embed = Embedding(vocab_size, d_model)
         self.pe = Positional_Encoding(d_model, max_seq_len)
         self.encoder1 = Encoder(d_model, h, max_seq_len, dp, d_ff)
+        self.encoder2 = Encoder(d_model, h, max_seq_len, dp, d_ff)
 
     def forward(self, src):
         input = self.pe(self.embed(src)) #FIXME: name
