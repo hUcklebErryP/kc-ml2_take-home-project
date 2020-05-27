@@ -1,7 +1,17 @@
-# byte-pair encoding Tokenize Model
-m.model
-m.vocab
 __pycache__/
 
 # vscode
 .vscode/
+
+# source data, target data
+SRC
+TRG
+
+# source sentence model, target sentence model
+src.model
+src.vocab
+trg.model
+trg.vocab
+
+# transformer model
+transformer.pt
